@@ -1,16 +1,20 @@
-# This is a sample Python script.
+import os
+import numpy as np
+import nibabel as nib
+from nibabel.testing import data_path
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+example_filename = os.path.join(data_path, 'example4d.nii.gz')
+#print(example_filename)
 
+img = nib.load(example_filename)
+img.shape
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+img.get_data_dtype() == np.dtype(np.int16)
 
+img.affine.shape
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+data = img.get_fdata()
+data.shape
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+hdr = img.header
+hdr.get_xyzt_units()
